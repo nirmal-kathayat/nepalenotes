@@ -1,0 +1,81 @@
+*{
+  font-family: "Poppins", sans-serif;
+}
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 95vh;
+}
+
+.heading-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.heading-wrapper h1{
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #434343;
+  font-weight: 600;
+}
+.required{
+  color: red;
+}
+form{
+  width:30%;
+}
+label{
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+}
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.flex-col{
+  flex-direction: column;
+  margin: 8px;
+}
+
+.flex-col input{
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #01ACF1;
+  outline: none;
+}
+.flex-row{
+  flex-direction: row;
+  padding-top: 10px;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+}
+.flex-col button{
+  padding: 10px;
+  cursor: pointer;
+  background-color: #01ACF1;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.flex-col button:hover{
+  border: none;
+  background-color: #26aee3;
+}
+.validation-error{
+  color: red;
+  font-size: 12px;
+}
+.flex-col a{
+  color: #01ACF1;
+  margin-top: 10px;
+  text-align: end;
+  color: red;
+}

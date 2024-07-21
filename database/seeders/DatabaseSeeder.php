@@ -10,13 +10,19 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
+    public $adminPassword = '$2y$10$JcmAHe5eUZ2rS0jU1GWr/.xhwCnh2RU13qwjTPcqfmtZXjZxcryPO';
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // admin seeder
+        \DB::connection('mysql')->table('admins')->insert([
+            [
+                'id' => '1',
+                'username' => 'superadmin',
+                'password' => $this->adminPassword,
+                'email' => 'superadmin@gmail.com',
+                'name' => 'Super Admin',
+                'created_at' => date('Y-m-d H:i:s')
+            ],
+        ]);
     }
 }
