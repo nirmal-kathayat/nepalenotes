@@ -84,9 +84,8 @@ class PermissionController extends Controller
     {
         try {
             $this->repo->deletePermission($id);
-            return redirect()->back()->with(['message' => 'Permission deleted successfully', 'type' => 'success']);
+            return response()->json(['message' => 'Permission deleted successfully', 'type' => 'success']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return redirect()->back()->with(['message' => 'Somthing were wrong', 'type' => 'error']);
         }
     }

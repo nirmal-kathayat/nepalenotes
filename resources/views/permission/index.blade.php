@@ -93,6 +93,29 @@
                 console.log(json); // Log the received JSON data
             }
         });
+        $(document).on('click', '.deleteAction', function(e) {
+            e.preventDefault();
+            var deleteUrl = $(this).attr('href');
+
+
+            $.ajax({
+                url: deleteUrl,
+                type: 'GET', 
+                dataType: 'json',
+                success: function(response) {
+                    table.ajax.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                    console.error('Response:', xhr.responseText);
+                    var errorMessage = 'An error occurred';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    }
+                    alert('Error: ' + errorMessage);
+                }
+            });
+        });
     });
 </script>
 @endpush

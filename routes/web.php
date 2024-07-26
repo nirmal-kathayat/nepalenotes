@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -41,5 +43,23 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
         Route::post('edit/{id}', [UserController::class, 'update'])->name('admin.user.update');
         Route::get('delete/{id}', [UserController::class, 'delete'])->name('admin.user.delete');
+    });
+
+    // class/grade
+    Route::group(['prefix' => 'grade'], function () {
+        Route::get('/', [GradeController::class, 'index'])->name('admin.grade');
+        Route::post('/store', [GradeController::class, 'store'])->name('admin.grade.store');
+        Route::get('edit/{id}',[GradeController::class,'edit'])->name('admin.grade.edit');
+        Route::put('edit/{id}',[GradeController::class,'update'])->name('admin.grade.update');
+        Route::get('/delete/{id}',[GradeController::class,'delete'])->name('admin.grade.delete');
+    });
+    // faculty
+
+    Route::group(['prefix'=>'faculty'],function(){
+        Route::get('/',[FacultyController::class,'index'])->name('admin.faculty');
+        Route::post('/store',[FacultyController::class,'store'])->name('admin.faculty.store');
+        Route::get('/edit/{id}',[FacultyController::class,'edit'])->name('admin.faculty.edit');
+        Route::put('/edit/{id}',[FacultyController::class,'update'])->name('admin.faculty.update');
+        Route::get('/delete/{id}',[FacultyController::class,'delete'])->name('admin.faculty.delete');
     });
 });

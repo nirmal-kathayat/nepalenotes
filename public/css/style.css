@@ -142,6 +142,7 @@ span.text-danger {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 120px;
 }
 .btn-cancel{
     background:#C6C6C6;
@@ -151,7 +152,7 @@ span.text-danger {
     color:#fff;
     border:0px;
     outline: none;
-    min-width:150px;
+    min-width:120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -280,16 +281,17 @@ span.text-danger {
     top: 100%;
     z-index: 1000;
     display: none;
-    min-width: 10rem;
+    min-width: 11.4rem;
     padding: 0.5rem 0;
     margin: 0.125rem 0 0;
     font-size: 1rem;
     color: #212529;
     text-align: left;
     list-style: none;
+    border-radius: 5px;
     background-color: #fff;
     background-clip: padding-box;
-    right: 30px;
+    right: 26px;
     box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.1);
 
 }
@@ -597,6 +599,7 @@ textarea:focus {
     position: sticky;
     top: 0;
     z-index: 111;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);;
 }
 
 .notification {
@@ -627,7 +630,9 @@ textarea:focus {
     display: flex;
     align-items: center;
     padding: 8px;
-    background-color: var(--primary-lightest);
+    /* background-color: var(--primary-lightest); */
+    border: 2px solid #EFEEF1;
+    background-color: #F5F6FA;
     border-radius: 8px;
     margin-left: 24px;
     cursor: pointer;
@@ -2930,6 +2935,45 @@ li.paginate_button.page-item {
 .menu-item.visible{
     display:block;
 }
+
+
+/* modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 8% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+.modal-content h2{
+    font-size: 16px;
+}
+
+#addGradeForm input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.form-group select{
+    width: 100%;
+    border: 1px solid #cacaca;
+    border-radius: 8px;
+    padding: 8px;
+    outline: none;
+}
+
 
 
 

@@ -23,6 +23,20 @@
                 </div>
             </a>
 
+            <a class="nav-item {{request()->is('admin/grade') ? ' active' : ''  }}" href="{{route('admin.grade')}}">
+                <div class="nav-item__icon">
+                    <img src="{{asset('images/class.png')}}" style="height: 20px; width:20px;" alt="">
+                </div>
+                <div class="nav-item__label">Grade</div>
+            </a>
+
+            <a class="nav-item {{request()->is('admin/faculty') ? ' active' : ''  }}" href="{{route('admin.faculty')}}">
+                <div class="nav-item__icon">
+                    <img src="{{asset('images/faculty.png')}}" style="height: 20px; width:20px;" alt="">
+                </div>
+                <div class="nav-item__label">Faculty</div>
+            </a>
+
             <a class="nav-item {{request()->is('admin/user') ? ' active' : ''  }}" href="{{route('admin.user')}}">
                 <div class="nav-item__icon">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,6 +46,7 @@
                 </div>
                 <div class="nav-item__label">User</div>
             </a>
+
 
             <a class="nav-item {{ request()->is('admin/permission') ? ' active' : ''  }}" href="{{route('admin.permission')}}">
                 <div class="nav-item__icon">
