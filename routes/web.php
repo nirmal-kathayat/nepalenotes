@@ -6,6 +6,7 @@ use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,13 +54,22 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('edit/{id}',[GradeController::class,'update'])->name('admin.grade.update');
         Route::get('/delete/{id}',[GradeController::class,'delete'])->name('admin.grade.delete');
     });
-    // faculty
 
+    // faculty
     Route::group(['prefix'=>'faculty'],function(){
         Route::get('/',[FacultyController::class,'index'])->name('admin.faculty');
         Route::post('/store',[FacultyController::class,'store'])->name('admin.faculty.store');
         Route::get('/edit/{id}',[FacultyController::class,'edit'])->name('admin.faculty.edit');
         Route::put('/edit/{id}',[FacultyController::class,'update'])->name('admin.faculty.update');
         Route::get('/delete/{id}',[FacultyController::class,'delete'])->name('admin.faculty.delete');
+    });
+
+    // subject
+    Route::group(['prefix'=>'subject'],function(){
+        Route::get('/',[SubjectController::class,'index'])->name('admin.subject');
+        Route::post('/store',[SubjectController::class,'store'])->name('admin.subject.store');
+        Route::get('/edit/{id}',[SubjectController::class,'edit'])->name('admin.subject.edit');
+        Route::put('/edit/{id}',[SubjectController::class,'update'])->name('admin.subject.update');
+        Route::get('/delete/{id}',[SubjectController::class,'delete'])->name('admin.subject.delete');
     });
 });

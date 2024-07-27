@@ -26,11 +26,11 @@
             @include('layouts.header')
             @yield('content')
         </div>
-        <div class="dashboard-open-button">
-            <button><i class="fa fa-arrow-right"></i></button>
-        </div>
+        <!-- <div class="dashboard-open-button">
+            <i class="fa-solid fa-bars"></i>
+        </div> -->
     </div>
-   
+
     <!-- Required vendors -->
     <script src="{{asset('vendor/jquery/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('vendor/jquery/popper.min.js')}}">
@@ -56,25 +56,27 @@
                     $('.top-dropdown-menu').slideDown()
                 }
             })
-            $('.dashboard-close-button button').on('click', function() {
-                $('.sidebar-wrapper').addClass('close-dash')
-                $('.dashboard-open-button').addClass('close-dash')
-                $('.main-wrapper').addClass('close-dash')
-                $('.sidebar-wrapper').removeClass('open-dash')
-                $('.dashboard-open-button').removeClass('open-dash')
-                $('.main-wrapper').removeClass('open-dash')
 
-            })
-            $('.dashboard-open-button button').on('click', function() {
-                $('.sidebar-wrapper').removeClass('close-dash')
-                $('.dashboard-open-button').removeClass('close-dash')
-                $('.main-wrapper').removeClass('close-dash')
+            // $('.dashboard-close-button button').on('click', function() {
+            //     $('.sidebar-wrapper').addClass('close-dash')
+            //     $('.dashboard-open-button').addClass('close-dash')
+            //     $('.main-wrapper').addClass('close-dash')
+            //     $('.sidebar-wrapper').removeClass('open-dash')
+            //     $('.dashboard-open-button').removeClass('open-dash')
+            //     $('.main-wrapper').removeClass('open-dash')
 
-                $('.sidebar-wrapper').addClass('open-dash')
-                $('.dashboard-open-button').addClass('open-dash')
-                $('.main-wrapper').addClass('open-dash')
+            // })
+            // $('.dashboard-open-button button').on('click', function() {
+            //     $('.sidebar-wrapper').removeClass('close-dash')
+            //     $('.dashboard-open-button').removeClass('close-dash')
+            //     $('.main-wrapper').removeClass('close-dash')
 
-            })
+            //     $('.sidebar-wrapper').addClass('open-dash')
+            //     $('.dashboard-open-button').addClass('open-dash')
+            //     $('.main-wrapper').addClass('open-dash')
+
+            // })
+
             $('.change-password-btn').on('click', function() {
                 $('.change-password-modal').show()
             })

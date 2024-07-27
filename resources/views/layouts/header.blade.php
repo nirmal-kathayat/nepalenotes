@@ -1,8 +1,10 @@
 <div class="topbar-wrapper">
+    <!-- <div class="menu-bar">
+        <button><i class="fas fa-bars"></i></button>
+    </div> -->
     <div class="notification">
         <!-- Your notification content -->
     </div>
-
     <div class="user-info-dropdown">
         <div class="user-info">
             <div class="user-photo">

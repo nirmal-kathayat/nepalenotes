@@ -595,7 +595,7 @@ textarea:focus {
     padding: 12px 24px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 111;
@@ -817,6 +817,18 @@ textarea:focus {
     width: 100%;
     border-bottom: 1px solid #f0f0f0;
     padding: 12px 0;
+}
+/* hamburger */
+.menu-bar button{
+    background-color: #2da5aa;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+}
+.menu-bar i{
+    padding: 8px 10px;
+    font-size: 20px;
 }
 
 .heading {
