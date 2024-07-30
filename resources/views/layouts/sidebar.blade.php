@@ -44,6 +44,13 @@
                 <div class="nav-item__label">Subject</div>
             </a>
 
+            <a class="nav-item {{request()->is('admin/course') ? ' active' : ''  }}" href="{{route('admin.course')}}">
+                <div class="nav-item__icon">
+                    <img src="{{asset('images/homework.png')}}" style="height: 20px; width:20px;" alt="">
+                </div>
+                <div class="nav-item__label">Course</div>
+            </a>
+
             <a class="nav-item {{request()->is('admin/user') ? ' active' : ''  }}" href="{{route('admin.user')}}">
                 <div class="nav-item__icon">
                     <img src="{{asset('images/user.png')}}" style="width: 20px; height:20px;" alt="">
@@ -64,7 +71,7 @@
 
             <a class="nav-item {{request()->is('admin/role') ? ' active' : ''  }}" href="{{route('admin.role')}}">
                 <div class="nav-item__icon">
-                   <img src="{{asset('images/role.png')}}" style="width: 20px; height:20px;" alt="">
+                    <img src="{{asset('images/role.png')}}" style="width: 20px; height:20px;" alt="">
                 </div>
                 <div class="nav-item__label">Role</div>
             </a>
