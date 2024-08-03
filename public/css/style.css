@@ -1227,12 +1227,11 @@ textarea:focus {
 
 
 .card {
-    width: 250px;
-    background-color: #fff;
+    /* width: 250px; */
+    background-color: #b1eaea;
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s ease-in-out;
     min-height: 200px;
     padding: 10px;
     row-gap: 10px;
@@ -1265,13 +1264,9 @@ textarea:focus {
 }
 
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+
 
 .card-content {
-    /* padding: 20px; */
     text-align: left; /* Center the icon and text */
 }
 
@@ -2621,7 +2616,7 @@ a.merge-billing-btn {
  .d-none{
         display:none;
     }
-    .btn.btn-secondary.btn-sm,.btn.btn-danger.btn-sm{
+    .btn.btn-secondary.btn-sm,.btn.btn-danger.btn-sm,.btn.btn-info.btn-sm{
         padding: 5px 10px !important;
     }
     table tbody tr td{
@@ -2963,8 +2958,8 @@ li.paginate_button.page-item {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 8% auto;
-    padding: 20px;
+    margin: 2% auto;
+    padding: 5px;
     border: 1px solid #888;
     width: 80%;
     max-width: 500px;
@@ -2985,6 +2980,45 @@ li.paginate_button.page-item {
     padding: 8px;
     outline: none;
 }
+
+.btn-info{
+    display: flex;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+    background: #34a2e9;
+}
+.btn-info:hover{
+    background: #0F95CE;
+}
+
+.modal-subject{
+    margin-top: 145px;
+}
+.modal-faculty{
+    margin-top: 145px;
+}
+.modal-grade{
+    margin-top: 160px;
+}
+.modal-course{
+    margin-top: 10px;
+}
+.modal-notes{
+    margin-top: 70px;
+}
+
+.row-gap{
+    gap: 30px;
+}
+#addNoteBtn{
+    width: 25%;
+}
+.card li{
+    font-size: 17px;
+    font-weight: 600;
+}
+
 
 
 

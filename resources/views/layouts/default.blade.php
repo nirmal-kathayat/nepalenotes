@@ -38,7 +38,7 @@
     <script src="{{asset('/vendor/bootstrap/bootstrap.min.js')}}">
     </script>
     <script src="{{asset('vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
-
+    <script src="https://cdn.tiny.cloud/1/e180jc2niw1am56cy9796zpbwjdn9ux6ewhj5bwnbx5qz7f9/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script type="text/javascript" src="{{asset('vendor/datatable/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('vendor/datatable/dataTables.bootstrap4.min.js')}}"></script>

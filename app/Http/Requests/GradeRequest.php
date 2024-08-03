@@ -22,7 +22,7 @@ class GradeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|integer|min:1|max:12',
+            'title' => 'required|string|min:1|max:12',
             'description' => 'nullable'
         ];
     }

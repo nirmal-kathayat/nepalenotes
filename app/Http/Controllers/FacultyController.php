@@ -37,8 +37,12 @@ class FacultyController extends Controller
     public function store(FacultyRequest $request)
     {
         try {
-            $data = $this->facultyRepo->storeFaculty($request->validated());
-            return response()->json(['message' => 'Faculty added successfully', 'type' => 'success', 'data' => $data]);
+            try {
+                $data = $this->facultyRepo->storeFaculty($request->validated());
+                return response()->json(['message' => 'Faculty added successfully', 'type' => 'success', 'data' => $data]);
+            } catch (\Exception $e) {
+                return response()->json(['message' => 'An error occurred while storing data', 'type' => 'error'], 500);
+            }
         } catch (\Exception $e) {
 
             return response()->json(['message' => 'An error occurred while storing data', 'type' => 'error', 'type' => 'error']);
@@ -57,8 +61,8 @@ class FacultyController extends Controller
     public function update(FacultyRequest $request, $id)
     {
         try {
-            $this->facultyRepo->update($request->validated(), $id);
-            return response()->json(['message' => 'Faculty added successfully', 'type' => 'success']);
+            $data = $this->facultyRepo->update($request->validated(), $id);
+            return response()->json(['message' => 'Faculty updated successfully', 'type' => 'success', 'data' => $data]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'An error occurred while storing data', 'type' => 'error', 'type' => 'error']);
         }

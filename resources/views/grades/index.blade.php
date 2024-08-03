@@ -32,7 +32,7 @@
 
     <!-- Modal -->
     <div id="gradeModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content modal-grade">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle">Add Grade</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -45,7 +45,7 @@
                     <input type="hidden" id="gradeId" name="gradeId">
                     <div class="form-group">
                         <label for="title" class="input-label required">Grade</label>
-                        <input type="number" name="title" id="gradeTitle" class="form-control" placeholder="Grade Name" required>
+                        <input type="text" name="title" id="gradeTitle" class="form-control" placeholder="Grade Name" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-cancel" data-dismiss="modal">Close</button>

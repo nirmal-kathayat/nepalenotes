@@ -17,11 +17,17 @@ class GradeRepository
     {
         return $this->query->get();
     }
+    public function getWithFacultyEligibility()
+    {
+        return $this->query->select('id', 'title', 'value')
+            ->selectRaw('CASE WHEN value >= 10 THEN true ELSE false END as can_have_faculty')
+            ->get();
+    }
 
     public function store(array $data)
     {
         return $this->query->create([
-            'title' => $data['title'],
+            'title' => $data['title']
         ]);
     }
 
@@ -34,6 +40,7 @@ class GradeRepository
         $query = [
             'title' => $data['title']
         ];
+        
         return $this->query->where('id', $id)->update($query);
     }
     public function delete($id)

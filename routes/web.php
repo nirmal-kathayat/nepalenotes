@@ -5,6 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubjectController;
@@ -44,6 +45,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('admin.subject.edit');
         Route::put('/edit/{id}', [SubjectController::class, 'update'])->name('admin.subject.update');
         Route::get('/delete/{id}', [SubjectController::class, 'delete'])->name('admin.subject.delete');
+        Route::get('/admin/faculties-by-grade/{gradeId}', [SubjectController::class, 'getFacultiesByGrade'])->name('admin.faculties-by-grade');
     });
     // Course
     Route::group(['prefix' => 'course'], function () {
@@ -51,7 +53,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/store', [CourseController::class, 'store'])->name('admin.course.store');
         Route::get('/edit/{id}', [CourseController::class, 'edit'])->name('admin.course.edit');
         Route::put('/edit/{id}', [CourseController::class, 'update'])->name('admin.course.update');
+        Route::get('/view/{id}', [CourseController::class, 'view'])->name('admin.course.view');
         Route::get('/delete/{id}', [CourseController::class, 'delete'])->name('admin.course.delete');
+        Route::get('/get-subjects', [CourseController::class, 'getSubjects'])->name('admin.get-subjects');
+    });
+
+    // Notes
+    Route::group(['prefix' => 'note'], function () {
+        Route::post('/store', [NoteController::class, 'store'])->name('admin.note.store');
     });
     // permission
     Route::group(['prefix' => 'permission'], function () {

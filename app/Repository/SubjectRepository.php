@@ -36,6 +36,7 @@ class SubjectRepository
         return $this->query->create($query);
     }
 
+
     public function find($id)
     {
         return $this->query->findOrFail($id);
@@ -43,7 +44,7 @@ class SubjectRepository
 
     public function update(array $data, int $id)
     {
-        return $this->query->where('id',$id)->update([
+        return $this->query->where('id', $id)->update([
             'grade_id' => $data['grade_id'],
             'faculty_id' => $data['faculty_id'],
             'title' => $data['title']
@@ -52,6 +53,6 @@ class SubjectRepository
 
     public function delete($id)
     {
-        return $this->query->where('id',$id)->delete($id);
+        return $this->query->where('id', $id)->delete($id);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\Course;
+use App\Models\Subject;
 
 class CourseRepository
 {
@@ -16,7 +17,8 @@ class CourseRepository
     {
         return $this->query
             ->leftJoin('grades', 'grades.id', '=', 'courses.grade_id')
-            ->select('courses.id', 'courses.title', 'courses.description', 'grades.title as grade_title');
+            ->leftJoin('subjects', 'subjects.id', '=', 'courses.subject_id')
+            ->select('courses.id', 'courses.title', 'courses.description', 'grades.title as grade_title', 'subjects.title as subject_title');
     }
     public function store(array $data)
     {
@@ -29,6 +31,7 @@ class CourseRepository
 
         return $this->query->create([
             'grade_id' => $data['grade_id'],
+            'subject_id' => $data['subject_id'],
             'title' => $data['title'],
             'image' => $data['image'],
             'description' => $data['description'],
@@ -39,7 +42,7 @@ class CourseRepository
         return $this->query->findOrFail($id);
     }
 
-    
+
     public function update(array $data, int $id)
     {
         $course = $this->find($id);
@@ -56,15 +59,16 @@ class CourseRepository
 
             $data['image'] = $imageName;
         } else {
-            
+
             unset($data['image']);
         }
 
         return $this->query->where('id', $id)->update([
             'grade_id' => $data['grade_id'],
+            'subject_id' => $data['subject_id'],
             'title' => $data['title'],
             'description' => $data['description'],
-            'image' => $data['image'] ?? $course->image, 
+            'image' => $data['image'] ?? $course->image,
         ]);
     }
 
@@ -76,5 +80,17 @@ class CourseRepository
             unlink($file_path);
         }
         return $this->query->where('id', $id)->delete($id);
+    }
+
+    public function getSubjectsByGrade($gradeId)
+    {
+        return Subject::where('grade_id', $gradeId)->get(['id', 'title']);
+    }
+
+    public function findWithRelations($id)
+    {
+        return $this->query
+            ->with(['grade:id,title', 'subject:id,title'])
+            ->findOrFail($id);
     }
 }

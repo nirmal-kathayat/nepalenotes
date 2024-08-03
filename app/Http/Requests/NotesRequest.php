@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FacultyRequest extends FormRequest
+class NotesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,9 @@ class FacultyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'grade_id' => 'required|exists:grades,id',
-            'title' => 'nullable',
+            'title' => 'required',
+            'image' => 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048',
+            'description' => 'required'
         ];
     }
 }

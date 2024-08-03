@@ -33,7 +33,7 @@
 
     <!-- Modal -->
     <div id="facultyModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content modal-faculty">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle">Add Faculty</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -46,10 +46,10 @@
                     <input type="hidden" id="facultyId" name="facultyId">
                     <div class="form-group">
                         <label for="grade_id" class="input-label required">Grade</label>
-                        <select name="grade_id" id="grade_id">
+                        <select name="grade_id" id="grade_id" required>
                             <option value="">Select the Grade</option>
                             @foreach($grades as $grade)
-                            <option value="{{ $grade->id }}">{{ $grade->title }}</option>
+                            <option value="{{ $grade->id }}" data-can-have-faculty="{{ $grade->can_have_faculty }}">{{ $grade->title }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -174,8 +174,31 @@
                 }
             });
         }
+        // faculty modal change
+        // $('#grade_id').on('change', updateFormFields);
+
+        // function updateFormFields() {
+        //     var selectedOption = $('#grade_id').find('option:selected');
+        //     var gradeValue = parseInt(selectedOption.text().match(/\d+/));
+
+        //     if (gradeValue >= 10) {
+        //         $('#facultyTitle').prop('disabled', false).show();
+        //         $('label[for="facultyTitle"]').show();
+        //     } else {
+        //         $('#facultyTitle').prop('disabled', true).hide();
+        //         $('label[for="facultyTitle"]').hide();
+        //     }
+        // }
 
         function submitForm() {
+            // var selectedGrade = $('#grade_id option:selected');
+            // var gradeValue = parseInt(selectedGrade.text().match(/\d+/));
+            // var formData = {
+            //     grade_id: $('#grade_id').val(),
+            //     title: gradeValue >= 10 ? $('#facultyTitle').val() : null
+            // };
+
+
             var url = isEditing ?
                 "{{ route('admin.faculty.update', ':id') }}".replace(':id', $('#facultyId').val()) :
                 "{{ route('admin.faculty.store') }}";

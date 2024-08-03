@@ -23,6 +23,7 @@ class CourseRequest extends FormRequest
     {
         return [
             'grade_id'=>'required',
+            'subject_id'=>'required',
             'title'=>'required',
             'image'=>'required',
             'description'=>'nullable'

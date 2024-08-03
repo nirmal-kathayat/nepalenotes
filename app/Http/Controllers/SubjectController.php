@@ -60,8 +60,8 @@ class SubjectController extends Controller
     public function update(SubjectRequest $request, $id)
     {
         try {
-            $this->subjectRepo->update($request->validated(),$id);
-            return response()->json(['message'=>'subject updated successfully!','type'=>'success']);
+            $this->subjectRepo->update($request->validated(), $id);
+            return response()->json(['message' => 'subject updated successfully!', 'type' => 'success']);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong!', 'type' => 'error', 'type' => 'error']);
         }
@@ -69,11 +69,21 @@ class SubjectController extends Controller
 
     public function delete($id)
     {
-        try{
+        try {
             $this->subjectRepo->delete($id);
-            return response()->json(['message'=>'Subject deleted successfully!','type'=>'success']);
-        }catch(\Exception $e){
+            return response()->json(['message' => 'Subject deleted successfully!', 'type' => 'success']);
+        } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong!', 'type' => 'error', 'type' => 'error']);
+        }
+    }
+
+    public function getFacultiesByGrade($gradeId)
+    {
+        try {
+            $faculties = $this->facultyRepo->getByGradeId($gradeId);
+            return response()->json($faculties);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong!', 'type' => 'error'], 500);
         }
     }
 }

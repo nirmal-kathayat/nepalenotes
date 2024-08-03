@@ -22,6 +22,7 @@
                         <tr class="table-header">
                             <th>S.no</th>
                             <th>Grade</th>
+                            <th>Subject</th>
                             <th>Course</th>
                             <th>Description</th>
                             <th>Action</th>
@@ -34,7 +35,7 @@
 
     <!-- Modal -->
     <div id="facultyModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content modal-course">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle">Add Courses</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -55,18 +56,24 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="subject_id" class="input-label required">Subject</label>
+                        <select name="subject_id" id="subject_id">
+                            <option value="">Select the subject</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="title" class="input-label required">Course</label>
                         <input type="text" name="title" id="facultyTitle" class="form-control" placeholder="Course Name" required>
                     </div>
-            
+
                     <div class="form-group">
                         <label class="input-label">Cover Image</label>
                         <input type="file" name="image" id="image" class="form-control">
-                        <img id="currentImage" src="" alt="Current Image" style="max-width: 50px; display: none;">
+                        <img id="currentImage" src="" alt="Current Image" style="max-width: 50px; display: none;height:30px;">
                     </div>
                     <div class="form-group">
                         <label for="">Description</label>
-                        <textarea name="description" id="description" placeholder="Course Detail"></textarea>
+                        <textarea name="description" style="height: 100px;" id="description" placeholder="Course Description"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-cancel" data-dismiss="modal">Close</button>
@@ -104,6 +111,11 @@
                     orderable: false
                 },
                 {
+                    data: 'subject_title',
+                    name: 'subjects.title',
+                    orderable: false
+                },
+                {
                     data: 'title',
                     name: 'title',
                     orderable: false
@@ -119,13 +131,43 @@
                     orderable: false,
                     searchable: false,
                     render: function(data, type, full, meta) {
+
+                        var viewButton = '<a href="' + "{{ route('admin.course.view', ':id') }}".replace(':id', full.id) + '" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>';
+
                         var editButton = '<button class="btn btn-secondary btn-sm edit-faculty" data-id="' + full.id + '"><i class="fas fa-edit"></i></button>';
                         var deleteButton = '<button class="btn btn-danger btn-sm delete-faculty" data-id="' + full.id + '"><i class="fa fa-trash"></i></button>';
-                        return '<div style="display:flex;">' + editButton + ' ' + deleteButton + '</div>';
+                        return '<div style="display:flex;">' + viewButton + ' ' + editButton + ' ' + deleteButton + '</div>';
                     }
                 }
             ]
         });
+
+        // course
+        $('#grade_id').on('change', function() {
+            var gradeId = $(this).val();
+            if (gradeId) {
+                $.ajax({
+                    url: "{{ route('admin.get-subjects') }}",
+                    type: 'GET',
+                    data: {
+                        grade_id: gradeId
+                    },
+                    success: function(data) {
+                        $('#subject_id').empty();
+                        $('#subject_id').append('<option value="">Select the subject</option>');
+                        $.each(data, function(key, value) {
+                            $('#subject_id').append('<option value="' + value.id + '">' + value.title + '</option>');
+                        });
+                        $('#subject_id').prop('disabled', false);
+                    }
+                });
+            } else {
+                $('#subject_id').empty();
+                $('#subject_id').append('<option value=""></option>');
+                $('#subject_id').prop('disabled', true);
+            }
+        });
+
 
         // Open modal for adding 
         $('#addFacultyBtn').on('click', function() {
@@ -160,7 +202,7 @@
 
         function openModal(editing, facultyId = null) {
             isEditing = editing;
-            $('#modalTitle').text(editing ? 'Edit Faculty' : 'Add Faculty');
+            $('#modalTitle').text(editing ? 'Edit Course' : 'Add Course');
             $('#submitButton').text(editing ? 'Update' : 'Submit');
             $('#facultyId').val(facultyId);
             $('#facultyForm')[0].reset();
@@ -184,6 +226,27 @@
                 success: function(response) {
                     $('#grade_id').val(response.grade_id);
                     $('#facultyTitle').val(response.title);
+                    $('#description').val(response.description);
+
+                    // Fetch subjects for the selected grade
+                    $.ajax({
+                        url: "{{ route('admin.get-subjects') }}",
+                        type: 'GET',
+                        data: {
+                            grade_id: response.grade_id
+                        },
+                        success: function(subjects) {
+                            $('#subject_id').empty();
+                            $('#subject_id').append('<option value="">Select the subject</option>');
+                            $.each(subjects, function(key, value) {
+                                $('#subject_id').append('<option value="' + value.id + '">' + value.title + '</option>');
+                            });
+                            $('#subject_id').prop('disabled', false);
+
+                            // Set the selected subject after  the dropdown
+                            $('#subject_id').val(response.subject_id);
+                        }
+                    });
 
                     if (response.image_url) {
                         $('#currentImage').attr('src', response.image_url).show();
@@ -211,7 +274,7 @@
             var formData = new FormData($('#facultyForm')[0]);
 
             if (isEditing) {
-                formData.append('_method', 'PUT'); 
+                formData.append('_method', 'PUT');
             }
             $.ajax({
                 url: url,
@@ -249,6 +312,7 @@
                 }
             });
         }
+
     });
 </script>
 @endpush

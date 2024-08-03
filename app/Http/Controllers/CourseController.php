@@ -44,6 +44,17 @@ class CourseController extends Controller
         }
     }
 
+    public function view($id)
+    {
+        try {
+            $course = $this->courseRepo->find($id);
+            $detail = $this->courseRepo->findWithRelations($id);
+            $course->image_url = $course->image ? asset('uploads/courses/' . $course->image) : null;
+            return view('course.view')->with(['course' => $course, 'detail' => $detail]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong!', 'type' => 'error']);
+        }
+    }
     public function edit($id)
     {
         try {
@@ -71,6 +82,17 @@ class CourseController extends Controller
         try {
             $this->courseRepo->delete($id);
             return response()->json(['message' => 'Course deleted successfully!', 'type' => 'success']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong!', 'type' => 'error']);
+        }
+    }
+
+    public function getSubjects(Request $request)
+    {
+        try {
+            $gradeId = $request->input('grade_id');
+            $subjects = $this->courseRepo->getSubjectsByGrade($gradeId);
+            return response()->json($subjects);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong!', 'type' => 'error']);
         }
