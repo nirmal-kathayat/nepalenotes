@@ -90,7 +90,7 @@ class CourseController extends Controller
     public function getSubjects(Request $request)
     {
         try {
-            $gradeId = $request->input('grade_id');
+            $gradeId = $request->get('grade_id');
             $subjects = $this->courseRepo->getSubjectsByGrade($gradeId);
             return response()->json($subjects);
         } catch (\Exception $e) {

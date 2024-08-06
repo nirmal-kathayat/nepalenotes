@@ -6,10 +6,6 @@
             <div class="page-title">Subject Lists</div>
             <div class="flex align-items-center">
                 <button class="btn btn--primary btn--icon ml-24" id="addFacultyBtn">
-                    <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.5 4.16663V15.8333" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M4.66669 10H16.3334" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
                     <span>Add Subject</span>
                 </button>
             </div>
@@ -129,7 +125,7 @@
         // faculty
         function populateFaculties(gradeId) {
             $.ajax({
-                url: "{{ route('admin.faculties-by-grade', ':gradeId') }}".replace(':gradeId', gradeId),
+                url: "{{ route('admin.facultiesByGrade', ':gradeId') }}".replace(':gradeId', gradeId),
                 method: 'GET',
                 success: function(response) {
                     var facultySelect = $('#faculty_id');

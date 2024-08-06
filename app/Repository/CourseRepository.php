@@ -43,6 +43,36 @@ class CourseRepository
     }
 
 
+    // public function update(array $data, int $id)
+    // {
+    //     $course = $this->find($id);
+
+    //     if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
+    //         $destination = 'uploads/courses/';
+    //         $imageName = time() . '_' . $data['image']->getClientOriginalName();
+    //         $data['image']->move(public_path($destination), $imageName);
+
+    //         // Delete old image
+    //         if ($course->image && file_exists(public_path($destination . $course->image))) {
+    //             unlink(public_path($destination . $course->image));
+    //         }
+
+    //         $data['image'] = $imageName;
+    //     } else {
+    //         // Keep the existing image if no new image is uploaded
+    //         unset($data['image']);
+    //     }
+
+    //     $course->update([
+    //         'grade_id' => $data['grade_id'],
+    //         'subject_id' => $data['subject_id'],
+    //         'title' => $data['title'],
+    //         'description' => $data['description'],
+    //         'image' => $data['image'] ?? $course->image,
+    //     ]);
+
+    //     return $course;
+    // }
     public function update(array $data, int $id)
     {
         $course = $this->find($id);
@@ -53,24 +83,27 @@ class CourseRepository
             $data['image']->move(public_path($destination), $imageName);
 
             // Delete old image
-            if (!empty($course->image) && file_exists(public_path($destination . $course->image))) {
+            if ($course->image && file_exists(public_path($destination . $course->image))) {
                 unlink(public_path($destination . $course->image));
             }
 
             $data['image'] = $imageName;
         } else {
-
+            // Keep the existing image if no new image is uploaded
             unset($data['image']);
         }
 
-        return $this->query->where('id', $id)->update([
+        $course->update([
             'grade_id' => $data['grade_id'],
             'subject_id' => $data['subject_id'],
             'title' => $data['title'],
             'description' => $data['description'],
             'image' => $data['image'] ?? $course->image,
         ]);
+
+        return $course;
     }
+
 
     public function delete($id)
     {

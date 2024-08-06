@@ -23,8 +23,9 @@ class NotesRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'image' => 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048',
-            'description' => 'required'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'required',
+            'course_id' => 'required'
         ];
     }
 }

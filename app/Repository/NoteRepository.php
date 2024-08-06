@@ -22,7 +22,8 @@ class NoteRepository
         try {
             $note = $this->query->create([
                 'title' => $data['title'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'course_id' => $data['course_id']
             ]);
 
             if (isset($data['images']) && is_array($data['images'])) {
@@ -42,7 +43,7 @@ class NoteRepository
         $imagePaths = [];
         foreach ($images as $image) {
             $filename = $image->getClientOriginalName();
-            $path = $image->move(public_path('uploads/notes'), $filename);
+            $path = $image->move(public_path('uploads/notes/'), $filename);
             $imagePaths[] = 'uploads/notes/' . $filename;
         }
         return $imagePaths;
@@ -55,6 +56,44 @@ class NoteRepository
                 'note_id' => $noteId,
                 'image_path' => $path
             ]);
+        }
+    }
+    public function getAllNotes()
+    {
+        return $this->query->with('images')
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    public function find($id)
+    {
+        return $this->query->findOrFail($id);
+    }
+
+    public function updateNotes(array $data, int $id)
+    {
+
+        DB::beginTransaction();
+
+        try {
+            $note = $this->query->findOrFail($id);
+
+            $note->update([
+                'title' => $data['title'],
+                'description' => $data['description']
+            ]);
+
+            if (isset($data['images']) && is_array($data['images'])) {
+                $note->images()->delete();
+                $imagePaths = $this->handleImageUploads($data['images']);
+                $this->storeNoteImages($note->id, $imagePaths);
+            }
+
+            DB::commit();
+            return $note;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
     }
 }

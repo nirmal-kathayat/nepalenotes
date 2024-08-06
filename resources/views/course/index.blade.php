@@ -6,10 +6,6 @@
             <div class="page-title">Course Lists</div>
             <div class="flex align-items-center">
                 <button class="btn btn--primary btn--icon ml-24" id="addFacultyBtn">
-                    <svg class="icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.5 4.16663V15.8333" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M4.66669 10H16.3334" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
                     <span>Add Course</span>
                 </button>
             </div>
@@ -69,8 +65,9 @@
                     <div class="form-group">
                         <label class="input-label">Cover Image</label>
                         <input type="file" name="image" id="image" class="form-control">
-                        <img id="currentImage" src="" alt="Current Image" style="max-width: 50px; display: none;height:30px;">
+                        <img id="currentImage" src="" alt="Current Image" style="max-width: 50px; display: none; height: 30px;">
                     </div>
+
                     <div class="form-group">
                         <label for="">Description</label>
                         <textarea name="description" style="height: 100px;" id="description" placeholder="Course Description"></textarea>
@@ -219,6 +216,7 @@
             $('#facultyForm')[0].reset();
         }
 
+        
         function fetchFacultyData(facultyId) {
             $.ajax({
                 url: "{{ route('admin.course.edit', ':id') }}".replace(':id', facultyId),
@@ -243,19 +241,17 @@
                             });
                             $('#subject_id').prop('disabled', false);
 
-                            // Set the selected subject after  the dropdown
+                            // Set the selected subject after the dropdown is populated
                             $('#subject_id').val(response.subject_id);
                         }
                     });
 
+                    // Display the current image
                     if (response.image_url) {
                         $('#currentImage').attr('src', response.image_url).show();
-                        $('#currentImageLabel').show();
                     } else {
                         $('#currentImage').hide();
-                        $('#currentImageLabel').hide();
                     }
-                    $('#image').val('');
                 },
                 error: function(xhr) {
                     swal('Error', 'Failed to fetch course data', 'error');
@@ -264,12 +260,13 @@
         }
 
 
+
         function submitForm() {
             var url = isEditing ?
                 "{{ route('admin.course.update', ':id') }}".replace(':id', $('#facultyId').val()) :
                 "{{ route('admin.course.store') }}";
 
-            var method = isEditing ? 'post' : 'POST';
+            var method = isEditing ? 'POST' : 'POST';
 
             var formData = new FormData($('#facultyForm')[0]);
 
