@@ -199,7 +199,7 @@
                 "{{ route('admin.faculty.update', ':id') }}".replace(':id', $('#facultyId').val()) :
                 "{{ route('admin.faculty.store') }}";
 
-            var method = isEditing ? 'PUT' : 'POST';
+            var method = isEditing ? 'post' : 'POST';
 
             $.ajax({
                 url: url,

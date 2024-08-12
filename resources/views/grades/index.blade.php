@@ -178,7 +178,7 @@
                 "{{ route('admin.grade.update', ':id') }}".replace(':id', $('#gradeId').val()) :
                 "{{ route('admin.grade.store') }}";
 
-            var method = isEditing ? 'PUT' : 'POST';
+            var method = isEditing ? 'POST' : 'POST';
 
             $.ajax({
                 url: url,

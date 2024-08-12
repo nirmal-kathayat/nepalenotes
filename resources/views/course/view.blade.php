@@ -16,39 +16,35 @@
 
         <div class="container">
             <div class="course-details">
-                <form method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="row row-gap">
-                        <div class="card" style="width: 47%;">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Course Title : {{$course->title}}</li>
-                                <li class="list-group-item">Grade Title : {{$detail->grade->title}}</li>
-                                <li class="list-group-item">Subject Title : {{$detail->subject->title}}</li>
-                                <li class="list-group-item flex-row">
-                                    <div class="description-label">Description:</div>
-                                    <div class="description-content">{{$course->description}}</div>
-                                </li>
-                            </ul>
-                        </div>
+                <div class="row row-gap">
+                    <div class="card" style="width: 47%;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Course Title : {{$course->title}}</li>
+                            <li class="list-group-item">Grade Title : {{$detail->grade->title}}</li>
+                            <li class="list-group-item">Subject Title : {{$detail->subject->title}}</li>
+                            <li class="list-group-item flex-row">
+                                <div class="description-label">Description:</div>
+                                <div class="description-content">{{$course->description}}</div>
+                            </li>
+                        </ul>
+                    </div>
 
-                        <div class="card" style="width: 47%;">
-                            <div class="image-group" style="display: flex; gap:5px;">
-                                @if($course->image_url)
-                                <img src="{{ $course->image_url }}" alt="Current Course Image" class="img-fluid mb-2" style="height: 200px; width:50%;margin-top:16px;border-radius:10px;">
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="card" style="width:97.5%;">
-                            <button type="button" class="btn btn--primary btn--icon ml-24" id="addNoteBtn">
-                                <span>Add Note</span>
-                            </button>
-                            <ul class="list-group list-group-flush" id="notesList">
-                            </ul>
+                    <div class="card" style="width: 47%;">
+                        <div class="image-group">
+                            @if($course->image_url)
+                            <img src="{{asset( $course->image_url) }}" alt="Current Course Image" class="img-fluid mb-2 course-image" style="height: 200px; width:auto;margin-top:16px;border-radius:10px;">
+                            @endif
                         </div>
                     </div>
-                </form>
+
+                    <div class="card" style="width:97.5%;">
+                        <button type="button" class="btn btn--primary btn--icon ml-24" id="addNoteBtn">
+                            <span>Add Note</span>
+                        </button>
+                        <ul class="list-group list-group-flush" id="notesList">
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -62,10 +58,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="noteForm" method="post" enctype="multipart/form-data">
+                    <form id="noteForm" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
-                        <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" id="noteId" name="noteId">
                         <div class="form-group">
                             <label for="noteTitle" class="input-label required">Note</label>
@@ -149,7 +143,7 @@
                                 <h5> ${note.title}</h5>
                                 <div class="note-images">
                                  ${note.images && note.images.length > 0 ? 
-                                  note.images.map(images => `<img src="/${images.image_path}" alt="Note Image" style="width: 18%; height: 200px; object-fit: cover; margin-right: 5px;">`).join('')
+                                  note.images.map(images => `<img src="{{asset('/${images.image_path}')}}" alt="Note Image" style="width: auto; height: 200px; object-fit: cover; margin-right: 5px;">`).join('')
                                  : 'No images for this note'}
                                 </div>
                                 <div class="note-description">
@@ -200,27 +194,18 @@
             let formData = new FormData(this);
             formData.append('course_id', courseId);
 
-            let ajaxUrl;
-            let ajaxType;
-
-            if (isEditMode) {
-                ajaxUrl = '{{ route("admin.note.update", ":id") }}'.replace(':id', $('#noteId').val());
-                ajaxType = 'POST';
-                formData.append('_method', 'PUT');
-            } else {
-                ajaxUrl = '{{ route("admin.note.store") }}';
-                ajaxType = 'POST';
-            }
-            // alert(ajaxUrl)
+            let ajaxUrl = isEditMode ?
+                '{{ route("admin.note.update", ":id") }}'.replace(':id', $('#noteId').val()) :
+                '{{ route("admin.note.store") }}';
 
             $.ajax({
                 url: ajaxUrl,
-                type: ajaxType,
+                type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
                 success: function(data) {
                     if (data.success) {

@@ -38,8 +38,6 @@
     <script src="{{asset('/vendor/bootstrap/bootstrap.min.js')}}">
     </script>
     <script src="{{asset('vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
-    <script src="https://cdn.tiny.cloud/1/your-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
     <script type="text/javascript" src="{{asset('vendor/datatable/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('vendor/datatable/dataTables.bootstrap4.min.js')}}"></script>
     @include('scripts.alertmessage')
@@ -56,26 +54,6 @@
                     $('.top-dropdown-menu').slideDown()
                 }
             })
-
-            // $('.dashboard-close-button button').on('click', function() {
-            //     $('.sidebar-wrapper').addClass('close-dash')
-            //     $('.dashboard-open-button').addClass('close-dash')
-            //     $('.main-wrapper').addClass('close-dash')
-            //     $('.sidebar-wrapper').removeClass('open-dash')
-            //     $('.dashboard-open-button').removeClass('open-dash')
-            //     $('.main-wrapper').removeClass('open-dash')
-
-            // })
-            // $('.dashboard-open-button button').on('click', function() {
-            //     $('.sidebar-wrapper').removeClass('close-dash')
-            //     $('.dashboard-open-button').removeClass('close-dash')
-            //     $('.main-wrapper').removeClass('close-dash')
-
-            //     $('.sidebar-wrapper').addClass('open-dash')
-            //     $('.dashboard-open-button').addClass('open-dash')
-            //     $('.main-wrapper').addClass('open-dash')
-
-            // })
 
             $('.change-password-btn').on('click', function() {
                 $('.change-password-modal').show()

@@ -271,7 +271,7 @@
             var formData = new FormData($('#facultyForm')[0]);
 
             if (isEditing) {
-                formData.append('_method', 'PUT');
+                formData.append('_method', 'POST');
             }
             $.ajax({
                 url: url,
